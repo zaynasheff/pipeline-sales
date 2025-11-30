@@ -148,6 +148,4 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
     {
         return [];
     }
-
-
 }
