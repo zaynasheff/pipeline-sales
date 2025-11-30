@@ -1,7 +1,8 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Zaynasheff\PipelineSales;
 
+use Filament\Facades\Filament;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -10,17 +11,18 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
-use VendorName\Skeleton\Testing\TestsSkeleton;
+use Zaynasheff\PipelineSales\Commands\PipelineSalesCommand;
+use Zaynasheff\PipelineSales\Testing\TestsPipelineSales;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class PipelineSalesServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'skeleton';
+    public static string $name = 'pipeline-sales';
 
-    public static string $viewNamespace = 'skeleton';
+    public static string $viewNamespace = 'pipeline-sales';
 
     public function configurePackage(Package $package): void
     {
@@ -36,7 +38,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub(':vendor_slug/:package_slug');
+                    ->askToStarRepoOnGitHub('zaynasheff/pipeline-sales');
             });
 
         $configFileName = $package->shortName();
@@ -62,6 +64,8 @@ class SkeletonServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        $this->app->register(\Zaynasheff\PipelineSales\PipelineSalesPanelProvider::class);
+
         // Asset Registration
         FilamentAsset::register(
             $this->getAssets(),
@@ -76,22 +80,31 @@ class SkeletonServiceProvider extends PackageServiceProvider
         // Icon Registration
         FilamentIcon::register($this->getIcons());
 
-        // Handle Stubs
+        // Register Livewire Kanban component
+        Livewire::component(
+            'pipeline-sales.pipeline-board',
+            \Zaynasheff\PipelineSales\Livewire\PipelineBoard::class
+        );
+
+
+
+        // Publish stubs
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/skeleton/{$file->getFilename()}"),
-                ], 'skeleton-stubs');
+                    $file->getRealPath() => base_path("stubs/pipeline-sales/{$file->getFilename()}"),
+                ], 'pipeline-sales-stubs');
             }
         }
 
         // Testing
-        Testable::mixin(new TestsSkeleton);
+        Testable::mixin(new TestsPipelineSales);
     }
+
 
     protected function getAssetPackageName(): ?string
     {
-        return ':vendor_slug/:package_slug';
+        return 'zaynasheff/pipeline-sales';
     }
 
     /**
@@ -100,9 +113,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('skeleton', __DIR__ . '/../resources/dist/components/skeleton.js'),
-            Css::make('skeleton-styles', __DIR__ . '/../resources/dist/skeleton.css'),
-            Js::make('skeleton-scripts', __DIR__ . '/../resources/dist/skeleton.js'),
+            // AlpineComponent::make('pipeline-sales', __DIR__ . '/../resources/dist/components/pipeline-sales.js'),
+            Css::make('pipeline-sales-styles', __DIR__ . '/../resources/dist/pipeline-sales.css'),
+            Js::make('pipeline-sales-scripts', __DIR__ . '/../resources/dist/pipeline-sales.js'),
         ];
     }
 
@@ -112,7 +125,8 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            SkeletonCommand::class,
+
+            \Zaynasheff\PipelineSales\Commands\EnableMultitenancyCommand::class,
         ];
     }
 
@@ -146,7 +160,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_skeleton_table',
+            'create_pipeline-sales_table',
         ];
     }
 }
