@@ -2,15 +2,16 @@
 
 namespace Zaynasheff\PipelineSales\Livewire;
 
-use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Component;
+use Zaynasheff\PipelineSales\Models\Deal;
 use Zaynasheff\PipelineSales\Models\Pipeline;
 use Zaynasheff\PipelineSales\Models\Stage;
-use Zaynasheff\PipelineSales\Models\Deal;
 
 class PipelineBoard extends Component
 {
     public $pipeline;
+
     public $stages = [];
 
     /**
@@ -32,9 +33,9 @@ class PipelineBoard extends Component
     /**
      * Update deal stage and position when dragging.
      *
-     * @param int $dealId
-     * @param int $newStageId
-     * @param array $orderedIds
+     * @param  int  $dealId
+     * @param  int  $newStageId
+     * @param  array  $orderedIds
      */
     #[On('dealMoved')]
     public function updateDealOrder($dealId, $newStageId, $orderedIds)

@@ -2,7 +2,6 @@
 
 namespace Zaynasheff\PipelineSales;
 
-use Filament\Facades\Filament;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -15,7 +14,6 @@ use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Zaynasheff\PipelineSales\Commands\PipelineSalesCommand;
 use Zaynasheff\PipelineSales\Testing\TestsPipelineSales;
 
 class PipelineSalesServiceProvider extends PackageServiceProvider
@@ -86,8 +84,6 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
             \Zaynasheff\PipelineSales\Livewire\PipelineBoard::class
         );
 
-
-
         // Publish stubs
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
@@ -100,7 +96,6 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
         // Testing
         Testable::mixin(new TestsPipelineSales);
     }
-
 
     protected function getAssetPackageName(): ?string
     {
