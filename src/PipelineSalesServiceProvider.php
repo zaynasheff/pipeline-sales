@@ -46,8 +46,11 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
         }
 
         if (file_exists($package->basePath('/../database/migrations'))) {
-            $package->hasMigrations();
+            $this->publishes([
+                $package->basePath('/../database/migrations') => database_path('migrations'),
+            ], 'pipeline-sales-migrations');
         }
+
 
         if (file_exists($package->basePath('/../resources/lang'))) {
             $package->hasTranslations();
