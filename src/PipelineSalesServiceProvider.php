@@ -51,7 +51,6 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
             ], 'pipeline-sales-migrations');
         }
 
-
         if (file_exists($package->basePath('/../resources/lang'))) {
             $package->hasTranslations();
         }
