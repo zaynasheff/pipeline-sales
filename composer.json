@@ -1,6 +1,7 @@
 {
     "name": "zaynasheff/pipeline-sales",
     "description": "This is my package pipeline-sales",
+    "version": "0.1.0",
     "keywords": [
         "Zaynasheff",
         "laravel",

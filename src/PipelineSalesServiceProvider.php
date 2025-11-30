@@ -48,7 +48,7 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
         }
 
         if (file_exists($package->basePath('/../database/migrations'))) {
-            $package->hasMigrations($this->getMigrations());
+            $package->hasMigrations();
         }
 
         if (file_exists($package->basePath('/../resources/lang'))) {
@@ -154,13 +154,5 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
         return [];
     }
 
-    /**
-     * @return array<string>
-     */
-    protected function getMigrations(): array
-    {
-        return [
-            'create_pipeline-sales_table',
-        ];
-    }
+
 }
