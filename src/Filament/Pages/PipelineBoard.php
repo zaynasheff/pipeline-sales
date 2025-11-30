@@ -9,7 +9,9 @@ class PipelineBoard extends Page
     protected static string $view = 'pipeline-sales::filament.pages.pipeline-board';
 
     protected static ?string $navigationIcon = 'heroicon-o-view-columns';
+
     protected static ?string $navigationLabel = 'Pipeline Board';
+
     protected static ?string $navigationGroup = 'Sales';
 
     protected static ?string $slug = 'pipeline-board';

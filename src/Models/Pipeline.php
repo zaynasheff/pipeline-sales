@@ -36,8 +36,6 @@ class Pipeline extends Model
     /**
      * Get the fillable attributes for the model.
      * Dynamically includes the tenant foreign key from config if multitenancy is enabled.
-     *
-     * @return array
      */
     public function getFillable(): array
     {
@@ -62,5 +60,4 @@ class Pipeline extends Model
     {
         return $this->hasMany(Stage::class)->orderBy('position');
     }
-
 }

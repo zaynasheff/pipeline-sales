@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Schema;
 class EnableMultitenancyCommand extends Command
 {
     protected $signature = 'pipeline-sales:enable-multitenancy';
+
     protected $description = 'Adds tenant field to plugin tables so multitenancy can be enabled.';
 
     public function handle()
@@ -25,14 +26,16 @@ class EnableMultitenancyCommand extends Command
 
         foreach ($tables as $table) {
             // Skip if table does not exist
-            if (!Schema::hasTable($table)) {
+            if (! Schema::hasTable($table)) {
                 $this->warn("Table '{$table}' does not exist — skipping.");
+
                 continue;
             }
 
             // Skip if the foreign key already exists
             if (Schema::hasColumn($table, $tenantKey)) {
                 $this->info("Table '{$table}' already contains '{$tenantKey}' — skipping.");
+
                 continue;
             }
 
@@ -81,6 +84,6 @@ PHP;
             sleep(1);
         }
 
-        $this->info("Run `php artisan migrate` to apply all changes.");
+        $this->info('Run `php artisan migrate` to apply all changes.');
     }
 }

@@ -65,5 +65,4 @@ class Stage extends Model
     {
         return $this->hasMany(Deal::class)->orderBy('position');
     }
-
 }

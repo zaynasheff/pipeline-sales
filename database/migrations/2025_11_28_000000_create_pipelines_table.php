@@ -4,13 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
-
+return new class extends Migration
+{
     public function up(): void
     {
         $tenantEnabled = config('pipeline-sales.multitenancy');
-        $tenantTable   = config('pipeline-sales.tenant.table');
-        $tenantKey     = config('pipeline-sales.tenant.foreign_key');
+        $tenantTable = config('pipeline-sales.tenant.table');
+        $tenantKey = config('pipeline-sales.tenant.foreign_key');
 
         Schema::create('pipelines', function (Blueprint $table) use ($tenantEnabled, $tenantTable, $tenantKey) {
             $table->id();
