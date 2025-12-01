@@ -2,7 +2,7 @@
 
 namespace Zaynasheff\PipelineSales;
 
-use Filament\Support\Assets\AlpineComponent;
+
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
@@ -10,7 +10,6 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
-use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -21,6 +20,8 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
     public static string $name = 'pipeline-sales';
 
     public static string $viewNamespace = 'pipeline-sales';
+
+
 
     public function configurePackage(Package $package): void
     {
@@ -61,11 +62,13 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
         }
     }
 
+
     public function packageRegistered(): void {}
 
     public function packageBooted(): void
     {
-        $this->app->register(\Zaynasheff\PipelineSales\PipelineSalesPanelProvider::class);
+
+
 
         // Asset Registration
         FilamentAsset::register(
@@ -81,11 +84,6 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
         // Icon Registration
         FilamentIcon::register($this->getIcons());
 
-        // Register Livewire Kanban component
-        Livewire::component(
-            'pipeline-sales.pipeline-board',
-            \Zaynasheff\PipelineSales\Livewire\PipelineBoard::class
-        );
 
         // Publish stubs
         if (app()->runningInConsole()) {
@@ -141,7 +139,9 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
      */
     protected function getRoutes(): array
     {
-        return [];
+        return [
+
+        ];
     }
 
     /**

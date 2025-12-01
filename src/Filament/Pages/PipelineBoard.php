@@ -6,23 +6,49 @@ use Filament\Pages\Page;
 
 class PipelineBoard extends Page
 {
-    protected static string $view = 'pipeline-sales::filament.pages.pipeline-board';
+    /**
+     * @var mixed|string|null
+     */
+    public static ?string $pluginNavigationLabel = null;
+    public static ?string $pluginNavigationGroup = null;
+    public static ?string $pluginNavigationIcon  = null;
+    public static ?int    $pluginNavigationSort  = null;
+    public static ?bool   $pluginNavigationHidden = null;
 
-    protected static ?string $navigationIcon = 'heroicon-o-view-columns';
-
-    protected static ?string $navigationLabel = 'Pipeline Board';
-
-    protected static ?string $navigationGroup = 'Sales';
+    public static ?string $pluginPageTitle = null;
 
     protected static ?string $slug = 'pipeline-board';
 
-    /**
-     * Title displayed in the header
-     */
-    protected static ?string $title = 'Pipeline Board';
+    protected static string $view = 'pipeline-sales::filament.pages.pipeline-board';
 
-    /**
-     * Livewire component that handles the logic
-     */
-    public string $livewireComponent = 'pipeline-sales.pipeline-board';
+
+    public static function getNavigationLabel(): string
+    {
+        return static::$pluginNavigationLabel ?? 'Pipeline Board';
+    }
+    public static function getNavigationGroup(): ?string
+    {
+        return static::$pluginNavigationGroup;
+    }
+
+    public static function getNavigationIcon(): ?string
+    {
+        return static::$pluginNavigationIcon ?? 'heroicon-o-view-columns';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return static::$pluginNavigationSort;
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return !static::$pluginNavigationHidden;
+    }
+
+    public function getTitle(): string
+    {
+        return static::$pluginPageTitle ?? 'Pipeline Board';
+    }
+
 }

@@ -2,59 +2,85 @@
 
 namespace Zaynasheff\PipelineSales\Livewire;
 
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Zaynasheff\PipelineSales\Models\Deal;
 use Zaynasheff\PipelineSales\Models\Pipeline;
 use Zaynasheff\PipelineSales\Models\Stage;
+use Livewire\Attributes\On;
 
 class PipelineBoard extends Component
 {
-    public $pipeline;
-
+    public $pipeline = null;
     public $stages = [];
 
-    /**
-     * Mounts the Kanban board for the first pipeline.
-     * Later we can allow user selection.
-     */
+    // новое поле для формы
+    public $newPipelineName = '';
+
     public function mount()
     {
-        // Load the first pipeline (or a selected one)
+        $this->loadPipeline();
+    }
+
+    private function loadPipeline()
+    {
         $this->pipeline = Pipeline::first();
 
-        // Load stages with related deals
+        if (! $this->pipeline) {
+            $this->stages = [];
+            return;
+        }
+
         $this->stages = Stage::where('pipeline_id', $this->pipeline->id)
             ->with('deals')
             ->orderBy('position')
             ->get();
     }
 
-    /**
-     * Update deal stage and position when dragging.
-     *
-     * @param  int  $dealId
-     * @param  int  $newStageId
-     * @param  array  $orderedIds
-     */
     #[On('dealMoved')]
     public function updateDealOrder($dealId, $newStageId, $orderedIds)
     {
-        // Move deal to a new stage
-        $deal = Deal::find($dealId);
-        $deal->stage_id = $newStageId;
-        $deal->save();
+        if (! $this->pipeline) return;
 
-        // Update order inside the column
+        $deal = Deal::find($dealId);
+        if ($deal) {
+            $deal->stage_id = $newStageId;
+            $deal->save();
+        }
+
         foreach ($orderedIds as $position => $id) {
             Deal::where('id', $id)->update(['position' => $position]);
         }
 
-        $this->mount(); // reload data
+        $this->loadPipeline();
+    }
+
+    public function createPipeline()
+    {
+        $this->validate([
+            'newPipelineName' => 'required|string|max:255',
+        ]);
+
+        $pipeline = Pipeline::create([
+            'name' => $this->newPipelineName,
+        ]);
+
+        // опционально можно создать первый Stage автоматически
+        Stage::create([
+            'name' => 'Stage 1',
+            'pipeline_id' => $pipeline->id,
+            'position' => 0,
+        ]);
+
+        $this->newPipelineName = '';
+
+        $this->loadPipeline(); // загружаем новый pipeline
     }
 
     public function render()
     {
-        return view('pipeline-sales::livewire.pipeline-board');
+        return view('pipeline-sales::livewire.pipeline-board', [
+            'pipeline' => $this->pipeline,
+            'stages'   => $this->stages,
+        ]);
     }
 }
