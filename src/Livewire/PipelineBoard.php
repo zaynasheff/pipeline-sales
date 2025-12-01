@@ -2,15 +2,16 @@
 
 namespace Zaynasheff\PipelineSales\Livewire;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Zaynasheff\PipelineSales\Models\Deal;
 use Zaynasheff\PipelineSales\Models\Pipeline;
 use Zaynasheff\PipelineSales\Models\Stage;
-use Livewire\Attributes\On;
 
 class PipelineBoard extends Component
 {
     public $pipeline = null;
+
     public $stages = [];
 
     // новое поле для формы
@@ -27,6 +28,7 @@ class PipelineBoard extends Component
 
         if (! $this->pipeline) {
             $this->stages = [];
+
             return;
         }
 
@@ -39,7 +41,9 @@ class PipelineBoard extends Component
     #[On('dealMoved')]
     public function updateDealOrder($dealId, $newStageId, $orderedIds)
     {
-        if (! $this->pipeline) return;
+        if (! $this->pipeline) {
+            return;
+        }
 
         $deal = Deal::find($dealId);
         if ($deal) {
@@ -80,7 +84,7 @@ class PipelineBoard extends Component
     {
         return view('pipeline-sales::livewire.pipeline-board', [
             'pipeline' => $this->pipeline,
-            'stages'   => $this->stages,
+            'stages' => $this->stages,
         ]);
     }
 }
