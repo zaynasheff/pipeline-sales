@@ -75,10 +75,23 @@ class PipelineSalesPlugin implements Plugin
 
     public function boot(Panel $panel): void
     {
+
         Livewire::component(
-            'pipeline-sales.pipeline-board',
-            \Zaynasheff\PipelineSales\Livewire\PipelineBoard::class
+            'kanban-board',
+            \Zaynasheff\PipelineSales\Filament\Components\KanbanBoard::class
         );
+
+        Livewire::component(
+            'kanban-column',
+            \Zaynasheff\PipelineSales\Filament\Components\KanbanColumn::class
+        );
+
+        Livewire::component(
+            'kanban-card',
+            \Zaynasheff\PipelineSales\Filament\Components\KanbanCard::class
+        );
+
+
 
         PipelineBoard::$pluginNavigationLabel = $this->navigationLabel;
         PipelineBoard::$pluginNavigationGroup = $this->navigationGroup;

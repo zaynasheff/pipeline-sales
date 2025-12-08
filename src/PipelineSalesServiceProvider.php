@@ -122,6 +122,7 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
         return [
 
             \Zaynasheff\PipelineSales\Commands\EnableMultitenancyCommand::class,
+            \Zaynasheff\PipelineSales\Commands\DisableMultitenancyCommand::class,
         ];
     }
 

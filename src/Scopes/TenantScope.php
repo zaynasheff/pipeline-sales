@@ -14,8 +14,12 @@ class TenantScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
+
+
+
         // Если мультитенантность отключена — не фильтруем
         if (! config('pipeline-sales.enable_multitenancy')) {
+
             return;
         }
 
@@ -26,6 +30,7 @@ class TenantScope implements Scope
         if (! auth()->check()) {
             return;
         }
+
 
         // Применяем фильтр по tenant
         $builder->where($model->getTable() . '.' . $tenantKey, auth()->user()->{$tenantKey});

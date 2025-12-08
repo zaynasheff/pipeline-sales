@@ -3,10 +3,16 @@
 namespace Zaynasheff\PipelineSales\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Zaynasheff\PipelineSales\Scopes\TenantScope;
 
 class Deal extends Model
 {
+    protected $primaryKey = 'uuid';
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
     /**
      * Apply tenant scope if multitenancy is enabled.
      */
@@ -23,6 +29,10 @@ class Deal extends Model
         parent::boot();
 
         static::creating(function ($model) {
+
+            if (! $model->uuid) {
+                $model->uuid = Str::uuid();
+            }
             if (config('pipeline-sales.enable_multitenancy') && auth()->check()) {
                 $tenantKey = config('pipeline-sales.tenant.foreign_key');
                 $model->{$tenantKey} = auth()->user()->{$tenantKey};
@@ -36,9 +46,14 @@ class Deal extends Model
     public function getFillable(): array
     {
         $fillable = [
-            'stage_id',
+            'uuid',
+            'stage_uuid',
             'name',
             'description',
+            'amount',
+            'priority',
+            'tags',
+            'due_date',
             'position',
         ];
 

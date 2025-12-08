@@ -13,8 +13,8 @@ return new class extends Migration
         $tenantKey = config('pipeline-sales.tenant.foreign_key');
 
         Schema::create('pipelines', function (Blueprint $table) use ($tenantEnabled, $tenantTable, $tenantKey) {
-            $table->id();
 
+            $table->uuid()->primary();
             // Add tenant relation only if multitenancy is enabled
             if ($tenantEnabled) {
                 $table->foreignId($tenantKey)
@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->text('description')->nullable();
-            $table->integer('position')->default(0); // сортировка
+            $table->integer('position')->default(0);
             $table->timestamps();
         });
     }

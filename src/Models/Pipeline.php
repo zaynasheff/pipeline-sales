@@ -3,10 +3,19 @@
 namespace Zaynasheff\PipelineSales\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Zaynasheff\PipelineSales\Scopes\TenantScope;
 
 class Pipeline extends Model
 {
+
+    protected $primaryKey = 'uuid';
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
+
     /**
      * Booted method to attach global scopes.
      * Here we attach the TenantScope to automatically filter
@@ -23,10 +32,18 @@ class Pipeline extends Model
      */
     protected static function boot(): void
     {
+
+
         parent::boot();
 
         static::creating(function ($model) {
+
+            if (! $model->uuid) {
+                $model->uuid = Str::uuid();
+            }
+
             if (config('pipeline-sales.enable_multitenancy') && auth()->check()) {
+
                 $tenantKey = config('pipeline-sales.tenant.foreign_key');
                 $model->{$tenantKey} = auth()->user()->{$tenantKey};
             }
@@ -40,6 +57,7 @@ class Pipeline extends Model
     public function getFillable(): array
     {
         $fillable = [
+            'uuid',
             'name',
             'description',
             'position',

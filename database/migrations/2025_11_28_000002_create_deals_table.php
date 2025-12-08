@@ -12,8 +12,9 @@ return new class extends Migration
         $tenantKey = config('pipeline-sales.tenant.foreign_key', 'company_id');
 
         Schema::create('deals', function (Blueprint $table) use ($tenantEnabled, $tenantKey) {
-            $table->id();
 
+            $table->uuid()->primary();
+            $table->uuid('stage_uuid');
             // Tenant key for multitenancy
             if ($tenantEnabled) {
                 $table->foreignId($tenantKey)
@@ -22,10 +23,18 @@ return new class extends Migration
             }
 
             // Foreign key to stage
-            $table->foreignId('stage_id')->constrained('stages')->cascadeOnDelete();
+            $table
+                ->foreign('stage_uuid')
+                ->references('uuid')
+                ->on('stages')
+                ->cascadeOnDelete();
 
             $table->string('name');
             $table->text('description')->nullable();
+            $table->decimal('amount', 12, 2)->default(0);
+            $table->tinyInteger('priority')->default(2);
+            $table->json('tags')->nullable();
+            $table->dateTime('due_date')->nullable();
             $table->integer('position')->default(0);
             $table->timestamps();
         });

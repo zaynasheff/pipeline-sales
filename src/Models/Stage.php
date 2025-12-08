@@ -3,10 +3,16 @@
 namespace Zaynasheff\PipelineSales\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Zaynasheff\PipelineSales\Scopes\TenantScope;
 
 class Stage extends Model
 {
+    protected $primaryKey = 'uuid';
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
     /**
      * Booted method to attach global scopes.
      * Filters stages by tenant if multitenancy is enabled.
@@ -24,6 +30,11 @@ class Stage extends Model
         parent::boot();
 
         static::creating(function ($model) {
+
+            if (! $model->uuid) {
+                $model->uuid = Str::uuid();
+            }
+
             if (config('pipeline-sales.enable_multitenancy') && auth()->check()) {
                 $tenantKey = config('pipeline-sales.tenant.foreign_key');
                 $model->{$tenantKey} = auth()->user()->{$tenantKey};
@@ -37,7 +48,8 @@ class Stage extends Model
     public function getFillable(): array
     {
         $fillable = [
-            'pipeline_id',
+            'uuid',
+            'pipeline_uuid',
             'name',
             'position',
         ];

@@ -1,0 +1,21 @@
+<?php
+
+
+return [
+    'create_pipeline' => 'Создать воронку',
+    'new_pipeline' => 'Новая воронка',
+    'save' => 'Сохранить',
+    'edit'=>'Изменить',
+    'delete'=>'Удалить',
+    'cancel'=>'Отменить',
+    'pipeline_name' => 'Название воронки',
+    'pipeline_description' => 'Описание воронки',
+    'stages' => 'Этапы',
+    'stage_name' => 'Название этапа',
+    'add_stage'=>'Добавить этап',
+    'no_pipelines'=>'Нет воронок',
+    'pipeline_board'=>'Воронки',
+    'no_deals'=>'Нет сделок',
+    'add_deal'=>'Добавить сделку',
+    'select_pipeline'=>'Выбор воронки',
+];
