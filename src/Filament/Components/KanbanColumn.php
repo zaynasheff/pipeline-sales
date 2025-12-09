@@ -96,6 +96,7 @@ class KanbanColumn extends Component implements HasForms,HasActions
                         ]);
 
                 $this->stage->load('deals');
+                $this->dispatch('dealCreated',id:'kanban-board');
 
             });
     }

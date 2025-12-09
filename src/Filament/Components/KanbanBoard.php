@@ -22,6 +22,7 @@ class KanbanBoard extends Component implements HasForms,HasActions
 
     protected $listeners = [
         'stageDeleted' => 'reloadStages',
+        'dealCreated' => 'reloadStages',
     ];
 
 
@@ -41,14 +42,14 @@ class KanbanBoard extends Component implements HasForms,HasActions
             ->modalWidth(MaxWidth::Large)
             ->icon('heroicon-o-plus')
             ->color('gray')
-            ->extraAttributes(['class' => 'w-full'])
+            ->extraAttributes(['class' => 'w-full','style'=>'width: 350px;'])
             ->form([
                 TextInput::make('name')
                     ->label(__('pipeline-sales::pipeline-sales.stage_name'))
                     ->required()
 
             ])
-            ->action(function ($data,$action) {
+            ->action(function ($data) {
 
                 $lastStagePosition = $this->pipeline->stages()->max('position');
 
@@ -61,13 +62,8 @@ class KanbanBoard extends Component implements HasForms,HasActions
                         ]);
 
 
-                //$this->dispatch('close-modal', id: 'createStage');
+                $this->pipeline->load('stages.deals');
 
-                //$this->pipeline->load('stages.deals');
-
-                $action->cancel();
-
-                $this->dispatch('stageCreated');
 
             });
     }
@@ -101,7 +97,9 @@ class KanbanBoard extends Component implements HasForms,HasActions
     #[On('stageDeleted')]
     public function reloadStages(): void
     {
-        $this->pipeline->load('stages.deals');
+
+       $this->pipeline->load('stages.deals');
+
     }
 
     public function render(): \Illuminate\Contracts\View\View

@@ -1,6 +1,6 @@
 <div>
 <div  class="draggable flex-shrink-0 snap-start" data-uuid="{{ $stage->uuid }}">
-    <div  style="width: 350px;" class="bg-gray-100 dark:bg-gray-900 rounded-xl shadow p-4 flex flex-col h-full">
+    <div  style="width: 350px;" class="bg-gray-100 dark:bg-gray-950 rounded-xl shadow p-4 flex flex-col h-full">
         <div class="flex justify-between">
             <h3 class="flex gap-3 text-gray-700 dark:text-gray-200 mb-5 cursor-move drag-handle" >
                 {{ $stage->name }}
@@ -27,7 +27,11 @@
         </div>
 
 
-        <div class="deals-sortable flex flex-col gap-3" data-stage-uuid="{{ $stage->uuid }}">
+        <div
+            class="deals-sortable flex flex-col gap-3"
+            data-stage-uuid="{{ $stage->uuid }}"
+            style="height: calc(100vh - 450px);overflow-y: auto;"
+        >
             @foreach($stage->deals as $deal)
                 <div class="deal-item"
                      data-uuid="{{ $deal->uuid }}">
