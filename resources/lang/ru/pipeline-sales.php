@@ -18,4 +18,8 @@ return [
     'no_deals'=>'Нет сделок',
     'add_deal'=>'Добавить сделку',
     'select_pipeline'=>'Выбор воронки',
+    'deal_name'=>'Название сделки',
+    'description'=>'Описание',
+    'add_description'=>'Добавить описание',
+    'add'=>'Добавить',
 ];

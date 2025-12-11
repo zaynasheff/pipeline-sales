@@ -19,6 +19,10 @@ class KanbanColumn extends Component implements HasForms,HasActions
 
     public Stage $stage;
 
+    protected $listeners = [
+        'dealMoved' => 'refreshStage',
+    ];
+
     public function getName(): string
     {
         return 'kanban-column';
@@ -99,5 +103,11 @@ class KanbanColumn extends Component implements HasForms,HasActions
                 $this->dispatch('dealCreated',id:'kanban-board');
 
             });
+    }
+
+    #[On('dealMoved')]
+    public function refreshStage(): void
+    {
+        $this->stage->refresh();
     }
 }

@@ -2,6 +2,7 @@
      class="flex gap-4 overflow-x-auto py-2 px-1  snap-x snap-mandatory"
 
 >
+
     @foreach($stages as $stage)
         <livewire:kanban-column
             :stage="$stage"
@@ -9,7 +10,7 @@
         />
     @endforeach
 
-    <div class="kanban-add-stage m-1" style="width: 350px;">
+    <div class="kanban-add-stage m-1" style="width: 275px;">
         {{$this->createStageAction}}
     </div>
 

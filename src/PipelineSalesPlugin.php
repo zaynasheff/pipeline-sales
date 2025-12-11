@@ -4,6 +4,7 @@ namespace Zaynasheff\PipelineSales;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Illuminate\Support\Facades\Blade;
 use Livewire\Livewire;
 use Zaynasheff\PipelineSales\Filament\Pages\PipelineBoard;
 
@@ -90,6 +91,32 @@ class PipelineSalesPlugin implements Plugin
             'kanban-card',
             \Zaynasheff\PipelineSales\Filament\Components\KanbanCard::class
         );
+
+        Livewire::component(
+            'card-modal',
+            \Zaynasheff\PipelineSales\Filament\Components\CardModal::class
+        );
+
+        Livewire::component(
+            'card-modal-name-editor',
+            \Zaynasheff\PipelineSales\Filament\Components\CardModalNameEditor::class
+        );
+
+        Livewire::component(
+            'card-modal-tags-editor',
+            \Zaynasheff\PipelineSales\Filament\Components\CardModalTagsEditor::class
+        );
+
+        Livewire::component(
+            'card-modal-description-editor',
+            \Zaynasheff\PipelineSales\Filament\Components\CardModalDescriptionEditor::class
+        );
+
+        Livewire::component(
+            'card-modal-users-editor',
+            \Zaynasheff\PipelineSales\Filament\Components\CardModalUsersEditor::class
+        );
+
 
 
 

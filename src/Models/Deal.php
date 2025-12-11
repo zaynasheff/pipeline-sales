@@ -2,6 +2,7 @@
 
 namespace Zaynasheff\PipelineSales\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Zaynasheff\PipelineSales\Scopes\TenantScope;
@@ -65,11 +66,25 @@ class Deal extends Model
         return $fillable;
     }
 
+    protected $casts = [
+        'tags' => 'array',
+    ];
+
     /**
      * Relationship: Deal belongs to a Stage.
      */
     public function stage(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Stage::class);
+    }
+
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'deal_user',
+            'deal_uuid',
+            'user_id'
+        );
     }
 }

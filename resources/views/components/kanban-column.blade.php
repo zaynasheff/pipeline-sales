@@ -1,6 +1,6 @@
 <div>
-<div  class="draggable flex-shrink-0 snap-start" data-uuid="{{ $stage->uuid }}">
-    <div  style="width: 350px;" class="bg-gray-100 dark:bg-gray-950 rounded-xl shadow p-4 flex flex-col h-full">
+    <div  class="draggable flex-shrink-0 snap-start" data-uuid="{{ $stage->uuid }}">
+    <div  style="width: 275px;" class="bg-gray-100 dark:bg-gray-950 rounded-xl shadow p-4 flex flex-col h-full">
         <div class="flex justify-between">
             <h3 class="flex gap-3 text-gray-700 dark:text-gray-200 mb-5 cursor-move drag-handle" >
                 {{ $stage->name }}
@@ -30,16 +30,26 @@
         <div
             class="deals-sortable flex flex-col gap-3"
             data-stage-uuid="{{ $stage->uuid }}"
-            style="height: calc(100vh - 450px);overflow-y: auto;"
+            style="max-height: calc(100vh - 450px);overflow-y: auto;"
         >
             @foreach($stage->deals as $deal)
-                <div class="deal-item"
-                     data-uuid="{{ $deal->uuid }}">
-                <livewire:kanban-card
-                    :deal="$deal"
-                    :key="'deal-'.$deal->uuid"
-                />
-                </div>
+
+                    <div class="deal-item overflow-visible border-2 border-transparent
+                                rounded-lg shadow p-3
+                                transition duration-300
+                                bg-white dark:bg-gray-800 cursor-pointer
+                                hover:bg-gray-100 dark:hover:bg-gray-700
+                                hover:border-gray-100
+                                hover:-translate-y-1 hover:shadow-lg drag-handle-card"
+                         data-uuid="{{ $deal->uuid }}"
+
+                    >
+                        <livewire:kanban-card
+                            :deal="$deal"
+                            :key="'deal-'.$deal->uuid"
+                        />
+                    </div>
+
             @endforeach
         </div>
 
@@ -49,6 +59,5 @@
         </div>
     </div>
 </div>
-
-<x-filament-actions::modals />
+    <x-filament-actions::modals />
 </div>

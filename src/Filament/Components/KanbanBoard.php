@@ -7,7 +7,6 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Notifications\Notification;
 use Filament\Support\Enums\MaxWidth;
 use Livewire\Component;
 use Zaynasheff\PipelineSales\Models\Deal;
@@ -17,7 +16,6 @@ use Zaynasheff\PipelineSales\Models\Stage;
 class KanbanBoard extends Component implements HasForms,HasActions
 {
     use InteractsWithActions, InteractsWithForms;
-
 
 
     protected $listeners = [
@@ -42,7 +40,7 @@ class KanbanBoard extends Component implements HasForms,HasActions
             ->modalWidth(MaxWidth::Large)
             ->icon('heroicon-o-plus')
             ->color('gray')
-            ->extraAttributes(['class' => 'w-full','style'=>'width: 350px;'])
+            ->extraAttributes(['class' => 'w-full','style'=>'width: 275px;'])
             ->form([
                 TextInput::make('name')
                     ->label(__('pipeline-sales::pipeline-sales.stage_name'))
@@ -92,6 +90,8 @@ class KanbanBoard extends Component implements HasForms,HasActions
 
         // перезагружаем доску
         $this->pipeline->load('stages.deals');
+        $this->dispatch('dealMoved',id:'kanban-column');
+
     }
 
     #[On('stageDeleted')]
@@ -101,6 +101,7 @@ class KanbanBoard extends Component implements HasForms,HasActions
        $this->pipeline->load('stages.deals');
 
     }
+
 
     public function render(): \Illuminate\Contracts\View\View
     {

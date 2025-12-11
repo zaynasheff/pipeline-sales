@@ -17,6 +17,9 @@ return [
     'no_deals'=>'No deals',
     'add_deal'=>'Add deal',
     'select_pipeline'=>'Select pipeline',
-
+    'deal_name'=>'Deal Name',
+    'description'=>'Description',
+    'add_description'=>'Add description',
+    'add'=>'Add',
 
 ];
