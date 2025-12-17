@@ -13,14 +13,13 @@
             </h3>
             <x-filament-actions::group
                 :actions="[
-            $this->editStageAction(),
-            $this->deleteStageAction(),
-        ]"
+                        $this->editStageAction(),
+                        $this->deleteStageAction(),
+                    ]"
                 label="Actions"
                 icon="heroicon-m-ellipsis-vertical"
                 color="black"
                 size="md"
-
                 dropdown-placement="bottom-start"
             />
 

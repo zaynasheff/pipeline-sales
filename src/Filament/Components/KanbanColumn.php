@@ -21,6 +21,7 @@ class KanbanColumn extends Component implements HasForms,HasActions
 
     protected $listeners = [
         'dealMoved' => 'refreshStage',
+        'dealDeleted' => 'refreshStage',
     ];
 
     public function getName(): string

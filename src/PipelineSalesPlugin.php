@@ -116,6 +116,10 @@ class PipelineSalesPlugin implements Plugin
             'card-modal-users-editor',
             \Zaynasheff\PipelineSales\Filament\Components\CardModalUsersEditor::class
         );
+//        Livewire::component(
+//            'card-modal-dropdown-actions',
+//            \Zaynasheff\PipelineSales\Filament\Components\CardModalDropdownActions::class
+//        );
 
 
 
