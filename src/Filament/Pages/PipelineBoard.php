@@ -23,10 +23,14 @@ class PipelineBoard extends Page implements HasForms
      * @var mixed|string|null
      */
     public static ?string $pluginNavigationLabel = null;
+
     public static ?string $pluginNavigationGroup = null;
-    public static ?string $pluginNavigationIcon  = null;
-    public static ?int    $pluginNavigationSort  = null;
-    public static ?bool   $pluginNavigationHidden = null;
+
+    public static ?string $pluginNavigationIcon = null;
+
+    public static ?int $pluginNavigationSort = null;
+
+    public static ?bool $pluginNavigationHidden = null;
 
     public static ?string $pluginPageTitle = null;
 
@@ -34,11 +38,11 @@ class PipelineBoard extends Page implements HasForms
 
     protected static string $view = 'pipeline-sales::filament.pages.pipeline-board';
 
-
     public static function getNavigationLabel(): string
     {
         return static::$pluginNavigationLabel ?? __('pipeline-sales::pipeline-sales.pipeline_board');
     }
+
     public static function getNavigationGroup(): ?string
     {
         return static::$pluginNavigationGroup;
@@ -56,7 +60,7 @@ class PipelineBoard extends Page implements HasForms
 
     public static function shouldRegisterNavigation(): bool
     {
-        return !static::$pluginNavigationHidden;
+        return ! static::$pluginNavigationHidden;
     }
 
     public function getTitle(): string
@@ -184,5 +188,4 @@ class PipelineBoard extends Page implements HasForms
                 }),
         ];
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace Zaynasheff\PipelineSales;
 
-
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
@@ -20,8 +19,6 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
     public static string $name = 'pipeline-sales';
 
     public static string $viewNamespace = 'pipeline-sales';
-
-
 
     public function configurePackage(Package $package): void
     {
@@ -61,13 +58,10 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
         }
     }
 
-
     public function packageRegistered(): void {}
 
     public function packageBooted(): void
     {
-
-
 
         // Asset Registration
         FilamentAsset::register(
@@ -82,7 +76,6 @@ class PipelineSalesServiceProvider extends PackageServiceProvider
 
         // Icon Registration
         FilamentIcon::register($this->getIcons());
-
 
         // Publish stubs
         if (app()->runningInConsole()) {

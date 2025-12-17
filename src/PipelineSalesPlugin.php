@@ -10,11 +10,14 @@ use Zaynasheff\PipelineSales\Filament\Pages\PipelineBoard;
 
 class PipelineSalesPlugin implements Plugin
 {
-
     protected ?string $navigationLabel = null;
+
     protected ?string $navigationGroup = null;
+
     protected ?string $navigationIcon = null;
+
     protected ?int $navigationSort = null;
+
     protected ?bool $navigationHidden = null;
 
     protected ?string $pageTitle = null;
@@ -22,35 +25,42 @@ class PipelineSalesPlugin implements Plugin
     public function navigationLabel(string $label): static
     {
         $this->navigationLabel = $label;
+
         return $this;
     }
+
     public function navigationGroup(string $group): static
     {
         $this->navigationGroup = $group;
+
         return $this;
     }
 
     public function navigationIcon(string $icon): static
     {
         $this->navigationIcon = $icon;
+
         return $this;
     }
 
     public function navigationSort(int $sort): static
     {
         $this->navigationSort = $sort;
+
         return $this;
     }
 
     public function hideNavigation(bool $hidden = true): static
     {
         $this->navigationHidden = $hidden;
+
         return $this;
     }
 
     public function title(string $title): static
     {
         $this->pageTitle = $title;
+
         return $this;
     }
 
@@ -65,13 +75,12 @@ class PipelineSalesPlugin implements Plugin
         $panel
 
             // Используйте discoverPages/Resources если хотите
-             ->discoverPages(
+            ->discoverPages(
                 in: __DIR__ . '/Filament/Pages',
                 for: 'Zaynasheff\\PipelineSales\\Filament\\Pages'
-            )
-            // ->resources([...])
-            // ->widgets([...])
-        ;
+            );
+        // ->resources([...])
+        // ->widgets([...])
     }
 
     public function boot(Panel $panel): void
@@ -126,8 +135,8 @@ class PipelineSalesPlugin implements Plugin
 
         PipelineBoard::$pluginNavigationLabel = $this->navigationLabel;
         PipelineBoard::$pluginNavigationGroup = $this->navigationGroup;
-        PipelineBoard::$pluginNavigationIcon  = $this->navigationIcon;
-        PipelineBoard::$pluginNavigationSort  = $this->navigationSort;
+        PipelineBoard::$pluginNavigationIcon = $this->navigationIcon;
+        PipelineBoard::$pluginNavigationSort = $this->navigationSort;
         PipelineBoard::$pluginNavigationHidden = $this->navigationHidden;
         PipelineBoard::$pluginPageTitle = $this->pageTitle;
     }
@@ -144,6 +153,4 @@ class PipelineSalesPlugin implements Plugin
 
         return $plugin;
     }
-
-
 }
