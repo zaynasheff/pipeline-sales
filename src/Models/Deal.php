@@ -4,11 +4,14 @@ namespace Zaynasheff\PipelineSales\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Zaynasheff\PipelineSales\Scopes\TenantScope;
 
 class Deal extends Model
 {
+
+    use SoftDeletes;
     protected $primaryKey = 'uuid';
 
     public $incrementing = false;

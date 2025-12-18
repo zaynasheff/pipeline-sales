@@ -71,20 +71,43 @@ class KanbanCard extends Component implements HasActions,HasForms
             ->color('danger')
             ->record($this->deal)
             ->requiresConfirmation()
+            ->modalHeading(__('pipeline-sales::pipeline-sales.delete_deal') .': '. $this->deal->name)
             ->action(function () {
-                $this->deal->delete();
+                $this->deal->forceDelete();
                 $this->dispatch('dealDeleted',id:'kanban-column');
             });
     }
 
-    // Добавьте этот метод в класс KanbanCard
+    public function archiveDealAction(): Action
+    {
+        return Action::make('archiveDeal')
+            ->label(__('pipeline-sales::pipeline-sales.archive'))
+            ->icon('heroicon-o-archive-box')
+            ->color('warning')
+            ->record($this->deal)
+            ->requiresConfirmation()
+            ->modalHeading(__('pipeline-sales::pipeline-sales.archive_deal') .': '. $this->deal->name)
+            ->action(function () {
+                $this->deal->delete();
+                $this->dispatch('dealArchived',id:'kanban-column');
+            });
+    }
+
+
     public function triggerDeleteFromModal(): void
     {
-        // Мы закрываем текущее окно просмотра, чтобы избежать конфликтов модалок
+
+       $this->unmountAction();
+
+       $this->mountAction('deleteDeal');
+    }
+
+    public function triggerArchiveFromModal(): void
+    {
+
         $this->unmountAction();
 
-        // И сразу монтируем действие удаления
-        $this->mountAction('deleteDeal');
+        $this->mountAction('archiveDeal');
     }
 
     public function render()

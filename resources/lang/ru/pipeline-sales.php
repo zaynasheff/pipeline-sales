@@ -22,4 +22,6 @@ return [
     'description'=>'Описание',
     'add_description'=>'Добавить описание',
     'add'=>'Добавить',
+    'delete_deal'=>'Удалить сделку',
+    'archive_deal'=>'Архивировать сделку',
 ];

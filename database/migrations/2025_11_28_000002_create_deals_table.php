@@ -37,6 +37,7 @@ return new class extends Migration
             $table->dateTime('due_date')->nullable();
             $table->integer('position')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

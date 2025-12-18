@@ -21,5 +21,7 @@ return [
     'description'=>'Description',
     'add_description'=>'Add description',
     'add'=>'Add',
+    'delete_deal'=>'Delete deal',
+    'archive_deal'=>'Archive deal',
 
 ];
