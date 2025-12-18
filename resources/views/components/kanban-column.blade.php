@@ -33,13 +33,7 @@
         >
             @foreach($stage->deals as $deal)
 
-                    <div class="deal-item overflow-visible border-2 border-transparent
-                                rounded-lg shadow p-3
-                                transition duration-300
-                                bg-white dark:bg-gray-800 cursor-pointer
-                                hover:bg-gray-100 dark:hover:bg-gray-700
-                                hover:border-gray-100
-                                hover:-translate-y-1 hover:shadow-lg drag-handle-card"
+                    <div class="deal-item overflow-visible drag-handle-card p-1"
                          data-uuid="{{ $deal->uuid }}"
 
                     >
@@ -52,7 +46,7 @@
             @endforeach
         </div>
 
-        <div class="mt-3">
+        <div class="mt-3 p-1">
             {{$this->createDealAction}}
 
         </div>

@@ -1,6 +1,15 @@
 <div>
+    <style>
+        .stage-card{
+            border:1px solid transparent;
+        }
+        .stage-card:hover{
+            border-color: rgb(var(--primary-500));;
+        }
+    </style>
     <div
         wire:click="mountAction('viewDeal')"
+        class="stage-card  shadow p-3 rounded-lg transition duration-300 bg-white dark:bg-gray-800 cursor-pointer"
     >
         <div class="font-semibold">{{ $deal->name }}</div>
 
