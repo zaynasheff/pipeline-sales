@@ -2,12 +2,10 @@
 
 namespace Zaynasheff\PipelineSales\Filament\Components;
 
-
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Forms\Components\TextInput;
 use Livewire\Component;
 use Zaynasheff\PipelineSales\Models\Deal;
 
@@ -18,7 +16,6 @@ class CardModalDescriptionEditor extends Component implements HasForms
     public Deal $deal;
 
     public bool $editingDescription = false;
-
 
     public array $data = [];
 
@@ -50,7 +47,6 @@ class CardModalDescriptionEditor extends Component implements HasForms
 
     public function startEditingDescription(): void
     {
-
 
         $this->editingDescription = true;
 

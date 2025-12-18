@@ -8,17 +8,15 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
 use Filament\Pages\Page;
-use Filament\Support\Enums\MaxWidth;
 use Illuminate\Support\Collection;
 use Zaynasheff\PipelineSales\Models\Pipeline;
 use Zaynasheff\PipelineSales\Models\Stage;
 
 class PipelineBoard extends Page implements HasForms
 {
-
     use InteractsWithForms;
+
     /**
      * @var mixed|string|null
      */
@@ -74,18 +72,17 @@ class PipelineBoard extends Page implements HasForms
     // --- Текущая воронка ---
     public ?Pipeline $pipeline = null;
 
-
     protected function queryString(): array
     {
         return [
             'uuid' => ['except' => null],
         ];
     }
-    public function mount():void
+
+    public function mount(): void
     {
 
-
-        if (!$this->uuid) {
+        if (! $this->uuid) {
             $default = Pipeline::first();
             if ($default) {
                 // НЕ возвращаем, а делаем Livewire redirect
@@ -99,7 +96,6 @@ class PipelineBoard extends Page implements HasForms
 
         $this->form->fill();
     }
-
 
     // --- Форма выбора воронки ---
     protected function getFormSchema(): array
@@ -118,16 +114,15 @@ class PipelineBoard extends Page implements HasForms
         ];
     }
 
-
     public function getPipelines(): Collection
     {
         return Pipeline::all();
     }
 
     // --- Получить стадии текущей воронки ---
-    public function getCurrentStages(): \Illuminate\Database\Eloquent\Collection|Collection
+    public function getCurrentStages(): \Illuminate\Database\Eloquent\Collection | Collection
     {
-        if (!$this->pipeline) {
+        if (! $this->pipeline) {
             return collect();
         }
 

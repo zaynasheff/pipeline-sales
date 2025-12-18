@@ -2,7 +2,6 @@
 
 namespace Zaynasheff\PipelineSales\Filament\Components;
 
-
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -17,7 +16,6 @@ class CardModalTagsEditor extends Component implements HasForms
     public Deal $deal;
 
     public bool $editingTags = false;
-
 
     public array $data = [];
 

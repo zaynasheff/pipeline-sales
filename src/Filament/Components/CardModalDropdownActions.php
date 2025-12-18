@@ -2,7 +2,6 @@
 
 namespace Zaynasheff\PipelineSales\Filament\Components;
 
-
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -11,9 +10,10 @@ use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
 use Zaynasheff\PipelineSales\Models\Deal;
 
-class CardModalDropdownActions extends Component implements HasForms,HasActions
+class CardModalDropdownActions extends Component implements HasActions, HasForms
 {
-    use InteractsWithForms,InteractsWithActions;
+    use InteractsWithActions;
+    use InteractsWithForms;
 
     public Deal $deal;
 
@@ -24,7 +24,6 @@ class CardModalDropdownActions extends Component implements HasForms,HasActions
         $this->mountAction('deleteDeal');
     }
 
-
     public function deleteDealAction(): Action
     {
         return Action::make('deleteDeal')
@@ -34,7 +33,7 @@ class CardModalDropdownActions extends Component implements HasForms,HasActions
             ->requiresConfirmation()
             ->action(function () {
                 $this->deal->delete();
-                $this->dispatch('dealDeleted',id:'kanban-column');
+                $this->dispatch('dealDeleted', id: 'kanban-column');
             });
     }
 

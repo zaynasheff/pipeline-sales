@@ -13,9 +13,10 @@ use Livewire\Component;
 use Zaynasheff\PipelineSales\Models\Deal;
 use Zaynasheff\PipelineSales\Models\Stage;
 
-class KanbanColumn extends Component implements HasForms,HasActions
+class KanbanColumn extends Component implements HasActions, HasForms
 {
-    use InteractsWithActions, InteractsWithForms;
+    use InteractsWithActions;
+    use InteractsWithForms;
 
     public Stage $stage;
 
@@ -47,14 +48,14 @@ class KanbanColumn extends Component implements HasForms,HasActions
                 TextInput::make('name')
                     ->label(__('pipeline-sales::pipeline-sales.stage_name'))
                     ->required()
-                    ->default($this->stage->name)
+                    ->default($this->stage->name),
             ])
             ->action(function ($data) {
 
                 $this->stage->update($data);
 
                 // Сообщаем родителю обновить список
-                $this->dispatch('stageEdited',id:'kanban-board');
+                $this->dispatch('stageEdited', id: 'kanban-board');
             });
     }
 
@@ -69,7 +70,7 @@ class KanbanColumn extends Component implements HasForms,HasActions
                 $this->stage->delete();
 
                 // Сообщаем родителю обновить список
-                $this->dispatch('stageDeleted',id:'kanban-board');
+                $this->dispatch('stageDeleted', id: 'kanban-board');
             });
     }
 
@@ -86,7 +87,7 @@ class KanbanColumn extends Component implements HasForms,HasActions
             ->form([
                 TextInput::make('name')
                     ->label(__('pipeline-sales::pipeline-sales.deal_name'))
-                    ->required()
+                    ->required(),
 
             ])
             ->action(function ($data) {
@@ -97,12 +98,13 @@ class KanbanColumn extends Component implements HasForms,HasActions
                     ->create(
                         [
                             'name' => $data['name'],
-                            'position' => (int)$lastDealPosition + 1,
-                            'stage_uuid'=>$this->stage->uuid
-                        ]);
+                            'position' => (int) $lastDealPosition + 1,
+                            'stage_uuid' => $this->stage->uuid,
+                        ]
+                    );
 
                 $this->stage->load('deals');
-                $this->dispatch('dealCreated',id:'kanban-board');
+                $this->dispatch('dealCreated', id: 'kanban-board');
 
             });
     }

@@ -26,7 +26,6 @@ return new class extends Migration
             $table->primary(['deal_uuid', 'user_id']);
         });
 
-
     }
 
     public function down(): void

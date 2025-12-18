@@ -2,11 +2,10 @@
 
 namespace Zaynasheff\PipelineSales\Filament\Components;
 
-
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Forms\Components\TextInput;
 use Livewire\Component;
 use Zaynasheff\PipelineSales\Models\Deal;
 
@@ -17,7 +16,6 @@ class CardModalNameEditor extends Component implements HasForms
     public Deal $deal;
 
     public bool $editingName = false;
-
 
     public array $data = [];
 
@@ -66,9 +64,8 @@ class CardModalNameEditor extends Component implements HasForms
         $this->editingName = false;
     }
 
-
-      public function saveName($value): void
-      {
+    public function saveName($value): void
+    {
 
         $this->validate(
             [

@@ -25,11 +25,13 @@ class DisableMultitenancyCommand extends Command
         foreach ($tables as $table) {
             if (! Schema::hasTable($table)) {
                 $this->warn("Table '{$table}' does not exist — skipping.");
+
                 continue;
             }
 
             if (! Schema::hasColumn($table, $tenantKey)) {
                 $this->info("Table '{$table}' has no '{$tenantKey}' — skipping.");
+
                 continue;
             }
 

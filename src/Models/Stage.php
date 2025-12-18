@@ -13,6 +13,7 @@ class Stage extends Model
     public $incrementing = false;
 
     protected $keyType = 'string';
+
     /**
      * Booted method to attach global scopes.
      * Filters stages by tenant if multitenancy is enabled.

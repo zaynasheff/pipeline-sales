@@ -2,14 +2,11 @@
 
 namespace Zaynasheff\PipelineSales\Filament\Components;
 
-
 use App\Models\User;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Forms\Components\TextInput;
 use Livewire\Component;
 use Zaynasheff\PipelineSales\Models\Deal;
 
@@ -20,7 +17,6 @@ class CardModalUsersEditor extends Component implements HasForms
     public Deal $deal;
 
     public bool $editingUsers = false;
-
 
     public array $data = [];
 
@@ -47,9 +43,9 @@ class CardModalUsersEditor extends Component implements HasForms
                     ->reactive()
                     ->afterStateUpdated(fn ($state) => $this->updateUsers($state))
                     ->extraAttributes([
-                        'x-on:blur' => "setTimeout(() => { \$wire.endEditingUsers() }, 50)",
+                        'x-on:blur' => 'setTimeout(() => { $wire.endEditingUsers() }, 50)',
                         'class' => 'w-full',
-                    ])
+                    ]),
 
             ])
             ->statePath('data');
@@ -77,7 +73,7 @@ class CardModalUsersEditor extends Component implements HasForms
         $this->dispatch('dealUpdated', uuid: $this->deal->uuid);
     }
 
-    public function render():\Illuminate\Contracts\View\View
+    public function render(): \Illuminate\Contracts\View\View
     {
         return view('pipeline-sales::components.card-modal-users-editor');
     }
