@@ -1,5 +1,6 @@
-<?php namespace Zaynasheff\PipelineSales\Filament\Components;
+<?php
 
+namespace Zaynasheff\PipelineSales\Filament\Components;
 
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -13,16 +14,15 @@ use Zaynasheff\PipelineSales\Models\Deal;
 use Zaynasheff\PipelineSales\Models\Pipeline;
 use Zaynasheff\PipelineSales\Models\Stage;
 
-class KanbanBoard extends Component implements HasForms,HasActions
+class KanbanBoard extends Component implements HasActions, HasForms
 {
-    use InteractsWithActions, InteractsWithForms;
-
+    use InteractsWithActions;
+    use InteractsWithForms;
 
     protected $listeners = [
         'stageDeleted' => 'reloadStages',
         'dealCreated' => 'reloadStages',
     ];
-
 
     public function getName(): string
     {
@@ -40,11 +40,11 @@ class KanbanBoard extends Component implements HasForms,HasActions
             ->modalWidth(MaxWidth::Large)
             ->icon('heroicon-o-plus')
             ->color('gray')
-            ->extraAttributes(['class' => 'w-full','style'=>'width: 275px;'])
+            ->extraAttributes(['class' => 'w-full', 'style' => 'width: 275px;'])
             ->form([
                 TextInput::make('name')
                     ->label(__('pipeline-sales::pipeline-sales.stage_name'))
-                    ->required()
+                    ->required(),
 
             ])
             ->action(function ($data) {
@@ -56,12 +56,11 @@ class KanbanBoard extends Component implements HasForms,HasActions
                         [
                             'name' => $data['name'],
                             'pipeline_uuid' => $this->pipeline->uuid,
-                            'position' => (int)$lastStagePosition + 1
-                        ]);
-
+                            'position' => (int) $lastStagePosition + 1,
+                        ]
+                    );
 
                 $this->pipeline->load('stages.deals');
-
 
             });
     }
@@ -90,7 +89,7 @@ class KanbanBoard extends Component implements HasForms,HasActions
 
         // перезагружаем доску
         $this->pipeline->load('stages.deals');
-        $this->dispatch('dealMoved',id:'kanban-column');
+        $this->dispatch('dealMoved', id: 'kanban-column');
 
     }
 
@@ -98,14 +97,14 @@ class KanbanBoard extends Component implements HasForms,HasActions
     public function reloadStages(): void
     {
 
-       $this->pipeline->load('stages.deals');
+        $this->pipeline->load('stages.deals');
 
     }
 
-
     public function render(): \Illuminate\Contracts\View\View
     {
-        return view('pipeline-sales::components.kanban-board',
+        return view(
+            'pipeline-sales::components.kanban-board',
             ['stages' => $this->pipeline->stages()->orderBy('position')->with('deals')->get()]
         );
     }

@@ -8,13 +8,11 @@ use Zaynasheff\PipelineSales\Scopes\TenantScope;
 
 class Pipeline extends Model
 {
-
     protected $primaryKey = 'uuid';
 
     public $incrementing = false;
 
     protected $keyType = 'string';
-
 
     /**
      * Booted method to attach global scopes.
@@ -32,7 +30,6 @@ class Pipeline extends Model
      */
     protected static function boot(): void
     {
-
 
         parent::boot();
 

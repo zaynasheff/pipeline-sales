@@ -4,7 +4,6 @@ namespace Zaynasheff\PipelineSales;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Illuminate\Support\Facades\Blade;
 use Livewire\Livewire;
 use Zaynasheff\PipelineSales\Filament\Pages\PipelineBoard;
 
@@ -125,13 +124,10 @@ class PipelineSalesPlugin implements Plugin
             'card-modal-users-editor',
             \Zaynasheff\PipelineSales\Filament\Components\CardModalUsersEditor::class
         );
-//        Livewire::component(
-//            'card-modal-dropdown-actions',
-//            \Zaynasheff\PipelineSales\Filament\Components\CardModalDropdownActions::class
-//        );
-
-
-
+        //        Livewire::component(
+        //            'card-modal-dropdown-actions',
+        //            \Zaynasheff\PipelineSales\Filament\Components\CardModalDropdownActions::class
+        //        );
 
         PipelineBoard::$pluginNavigationLabel = $this->navigationLabel;
         PipelineBoard::$pluginNavigationGroup = $this->navigationGroup;

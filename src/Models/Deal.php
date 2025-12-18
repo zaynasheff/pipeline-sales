@@ -10,13 +10,14 @@ use Zaynasheff\PipelineSales\Scopes\TenantScope;
 
 class Deal extends Model
 {
-
     use SoftDeletes;
+
     protected $primaryKey = 'uuid';
 
     public $incrementing = false;
 
     protected $keyType = 'string';
+
     /**
      * Apply tenant scope if multitenancy is enabled.
      */

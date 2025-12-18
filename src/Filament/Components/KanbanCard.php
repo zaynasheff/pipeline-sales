@@ -2,20 +2,19 @@
 
 namespace Zaynasheff\PipelineSales\Filament\Components;
 
-
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\MaxWidth;
-use Illuminate\Support\HtmlString;
 use Livewire\Component;
 use Zaynasheff\PipelineSales\Models\Deal;
 
-class KanbanCard extends Component implements HasActions,HasForms
+class KanbanCard extends Component implements HasActions, HasForms
 {
-    use InteractsWithActions,InteractsWithForms;
+    use InteractsWithActions;
+    use InteractsWithForms;
 
     public Deal $deal;
 
@@ -39,6 +38,7 @@ class KanbanCard extends Component implements HasActions,HasForms
             $this->deleteDealAction(),
         ];
     }
+
     public function viewDealAction(): Action
     {
         return Action::make('viewDeal')
@@ -71,10 +71,10 @@ class KanbanCard extends Component implements HasActions,HasForms
             ->color('danger')
             ->record($this->deal)
             ->requiresConfirmation()
-            ->modalHeading(__('pipeline-sales::pipeline-sales.delete_deal') .': '. $this->deal->name)
+            ->modalHeading(__('pipeline-sales::pipeline-sales.delete_deal') . ': ' . $this->deal->name)
             ->action(function () {
                 $this->deal->forceDelete();
-                $this->dispatch('dealDeleted',id:'kanban-column');
+                $this->dispatch('dealDeleted', id: 'kanban-column');
             });
     }
 
@@ -86,20 +86,19 @@ class KanbanCard extends Component implements HasActions,HasForms
             ->color('warning')
             ->record($this->deal)
             ->requiresConfirmation()
-            ->modalHeading(__('pipeline-sales::pipeline-sales.archive_deal') .': '. $this->deal->name)
+            ->modalHeading(__('pipeline-sales::pipeline-sales.archive_deal') . ': ' . $this->deal->name)
             ->action(function () {
                 $this->deal->delete();
-                $this->dispatch('dealArchived',id:'kanban-column');
+                $this->dispatch('dealArchived', id: 'kanban-column');
             });
     }
-
 
     public function triggerDeleteFromModal(): void
     {
 
-       $this->unmountAction();
+        $this->unmountAction();
 
-       $this->mountAction('deleteDeal');
+        $this->mountAction('deleteDeal');
     }
 
     public function triggerArchiveFromModal(): void
