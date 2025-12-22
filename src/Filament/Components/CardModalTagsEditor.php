@@ -23,7 +23,6 @@ class CardModalTagsEditor extends Component implements HasForms
     {
         $this->deal = $deal;
 
-
         $this->form->fill([
             'tags' => $this->deal->tags ?? [],
         ]);
@@ -36,7 +35,7 @@ class CardModalTagsEditor extends Component implements HasForms
                 TagsInput::make('tags')
                     ->visible(fn () => $this->editingTags)
                     ->label(false)
-                    //->suggestions($this->getAllTags())
+                    // ->suggestions($this->getAllTags())
                     ->reactive()
                     ->afterStateUpdated(function ($state) {
                         $this->saveTags($state);
@@ -44,7 +43,7 @@ class CardModalTagsEditor extends Component implements HasForms
                     ->extraInputAttributes([
                         'data-prevent-focus-trap' => true,
                         'x-on:blur' => 'setTimeout(() => $wire.endEditingTags(), 150)',
-                    ])
+                    ]),
             ])
             ->statePath('data');
     }
