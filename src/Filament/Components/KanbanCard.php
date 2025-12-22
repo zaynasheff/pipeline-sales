@@ -45,8 +45,7 @@ class KanbanCard extends Component implements HasActions, HasForms
             ->modalHeading(function () {
                 return new \Illuminate\Support\HtmlString(
                     view('pipeline-sales::components.card-modal-heading', [
-                        'deal' => $this->deal,
-                        'deleteAction' => $this->getAction('deleteDeal'),
+                        'stage_name' => $this->deal->stage->name,
                     ])->render()
                 );
             })

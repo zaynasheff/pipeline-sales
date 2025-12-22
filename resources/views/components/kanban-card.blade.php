@@ -2,6 +2,7 @@
     <style>
         .stage-card{
             border:1px solid transparent;
+            word-break: break-all;
         }
         .stage-card:hover{
             border-color: rgb(var(--primary-500));;
@@ -18,7 +19,7 @@
                 @foreach($deal->tags as $tag)
                     <span
                         style="font-size:10px; line-height:1;"
-                        class="px-1.5 py-0.5  bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded">
+                        class="px-1 py-1  bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded">
                         {{ $tag }}
                     </span>
                 @endforeach

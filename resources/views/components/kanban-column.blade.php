@@ -1,12 +1,20 @@
 <div>
+    <style>
+        .fi-badge{
+            max-height: 24px;
+        }
+        .column-heading{
+            word-break: break-all;
+        }
+    </style>
     <div  class="draggable flex-shrink-0 snap-start" data-uuid="{{ $stage->uuid }}">
     <div  style="width: 275px;" class="bg-gray-100 dark:bg-gray-950 rounded-xl shadow p-4 flex flex-col h-full">
-        <div class="flex justify-between">
-            <h3 class="flex gap-3 text-gray-700 dark:text-gray-200 mb-5 cursor-move drag-handle" >
+        <div class="flex justify-between ps-1">
+            <h3 class="column-heading flex gap-3 text-gray-700 dark:text-gray-200 mb-5 cursor-move drag-handle" >
                 {{ $stage->name }}
                 <x-filament::badge
                     color="gray"
-                    class="text-xs"
+                    class="text-xs shrink-0"
                 >
                     {{ $stage->deals->count() }}
                 </x-filament::badge>

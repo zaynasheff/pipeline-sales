@@ -48,6 +48,7 @@ class KanbanColumn extends Component implements HasActions, HasForms
                 TextInput::make('name')
                     ->label(__('pipeline-sales::pipeline-sales.stage_name'))
                     ->required()
+                    ->maxLength(255)
                     ->default($this->stage->name),
             ])
             ->action(function ($data) {
